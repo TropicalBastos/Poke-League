@@ -1,0 +1,9 @@
+{
+    "dependencies": {
+        "node-sass": "^4.13.1",
+        "react-scripts": "3.4.1"
+    },
+    "scripts": {
+        "build-frontend": "cd client && npm install && react-scripts build"
+    }
+}

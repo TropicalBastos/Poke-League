@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Comic+Neue&display=swap');
+
+html {
+    font-size: 16px;
+    background-color: #3D7DCA;
+}
+
+* {
+    font-family: 'Comic Neue', cursive;
+}
+
+.league_table_wrapper {
+    margin : 0 auto;
+    width: 800px;
+    max-width: 100%;
+    margin-top: 2rem;
+
+    h1 {
+        text-align: center;
+        text-transform: uppercase;
+        color: white;
+    }
+
+    .league_table_inner {
+        width: 100%;
+
+        .league_table_inner_header {
+            background-color: #FFCB05;
+            color: black;
+            font-weight: bold;
+        }
+
+        .league_table_inner_body {
+            background-color: #003A70;
+            color: white;
+        }
+
+        .league_table_inner_header, .league_table_inner_body_row {
+            display: flex;
+
+            div, .add_row {
+                padding: .5rem;
+                flex: 1;
+                cursor: pointer;
+            }
+
+            input {
+                background-color: transparent;
+                color: white;
+                font-size: 1rem;
+                padding: 0;
+                border: 0;
+                width: 100%;
+                outline: none;
+            }
+
+            .add_row {
+                text-align: center;
+                background-color: #3D7DCA;
+                color: white;
+                cursor: pointer;
+            }
+
+            .league_table_inner_body_row_delete {
+                cursor: pointer;
+
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+    }
+}
