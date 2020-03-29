@@ -16,6 +16,7 @@ html {
 
 .logo {
     width: 350px;
+    max-width: 100%;
     margin: 0 auto;
     display: block;
 }
@@ -47,10 +48,15 @@ html {
             color: white;
         }
 
+        .league_table_inner_header {
+            div { cursor: default !important; }
+        }
+
         .league_table_inner_header, .league_table_inner_body_row {
             display: flex;
 
             div, .add_row {
+                border: solid 1px transparent;
                 padding: .5rem;
                 flex: 1;
                 cursor: pointer;
@@ -88,5 +94,62 @@ html {
                 }
             }
         }
+
+        .league_table_inner_body_row {
+            div:hover:not(.league_table_inner_body_row_delete):not(.add_row) {
+                border-color: white;
+            }
+        }
+    }
+}
+
+.modal_wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: rgba(0, 0, 0, .35);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: fadeIn .3s;
+    animation-fill-mode: forwards;
+
+    .modal_inner {
+        width: 300px;
+        margin: 0 auto;
+        top: 30vh;
+        position: relative;
+        background: #FFCB05;
+        padding: 1.5rem;
+        border: solid 2px white;
+
+        .modal_footer {
+            button {
+                border-radius: 0;
+                width: 50px;
+                padding: .3rem;
+                border: 0;
+                margin-right: .5rem;
+                cursor: pointer;
+
+                &:hover {
+                    background: #3D7DCA;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+.white_border {
+    border-color: white !important;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

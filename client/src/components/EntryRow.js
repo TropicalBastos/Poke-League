@@ -51,6 +51,7 @@ class EntryRow extends Component {
         return (
             <div className="league_table_inner_body_row">
                 <div 
+                    className={(fieldEdit.field === 'name' && fieldEdit.id === id) ? 'white_border': ''}
                     onClick={() => onEdit('name', id)}>
                     {fieldEdit.field === 'name' && fieldEdit.id === id ? 
                         <input 
@@ -63,6 +64,7 @@ class EntryRow extends Component {
                     }
                 </div>
                 <div 
+                    className={(fieldEdit.field === 'wins' && fieldEdit.id === id) ? 'white_border': ''}
                     onClick={() => onEdit('wins', id)}>
                     {fieldEdit.field === 'wins' && fieldEdit.id === id ? 
                         <input 
@@ -76,6 +78,7 @@ class EntryRow extends Component {
                     }
                 </div>
                 <div 
+                    className={(fieldEdit.field === 'draws' && fieldEdit.id === id) ? 'white_border': ''}
                     onClick={() => onEdit('draws', id)}>
                     {fieldEdit.field === 'draws' && fieldEdit.id === id ? 
                         <input 
@@ -89,6 +92,7 @@ class EntryRow extends Component {
                     }
                 </div>
                 <div 
+                    className={(fieldEdit.field === 'losses' && fieldEdit.id === id) ? 'white_border': ''}
                     onClick={() => onEdit('losses', id)}>
                     {fieldEdit.field === 'losses' && fieldEdit.id === id ? 
                         <input 

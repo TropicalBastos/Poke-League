@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EntryRow from './EntryRow';
 import Api from '../api/api';
 import Notifications, {notify} from 'react-notify-toast';
+import ConfirmationModal from './ConfirmationModal';
 import logo from '../assets/logo.png';
 import './style.scss';
 
@@ -18,6 +19,9 @@ export default class LeagueTable extends Component {
             fieldEdit: {
                 ...initialFieldEdit 
             },
+            deleteModal: false,
+            deleteId: null,
+            resetSeasonModal: false,
         };
     }
 
@@ -75,13 +79,30 @@ export default class LeagueTable extends Component {
     }
 
     render() {
-        let { entries, fieldEdit } = this.state;
+        let { entries, fieldEdit, deleteId, deleteModal } = this.state;
         entries = entries.sort((a, b) => b.score - a.score);
 
         return (
             <div className="league_table_wrapper">
                 <img className="logo" src={logo} />
                 <Notifications />
+                {deleteModal &&
+                    <ConfirmationModal
+                        title="Confirm"
+                        message="Are you sure you wish to delete this record?"
+                        onApprove={() => {
+                            this.setState({
+                                deleteId: null,
+                                deleteModal: false,
+                            });
+                            this.onDelete(deleteId)
+                        }}
+                        onDecline={() => this.setState({
+                            deleteId: null,
+                            deleteModal: false,
+                        })}
+                    />
+                }
                 <div className="league_table_inner">
                     <div className="league_table_inner_header">
                         <div>
@@ -108,7 +129,10 @@ export default class LeagueTable extends Component {
                         {entries.map((entry, index) => (
                             <EntryRow 
                                 key={index}
-                                onDelete={this.onDelete} 
+                                onDelete={(id) => this.setState({ 
+                                    deleteId: id,
+                                    deleteModal: true,
+                                })} 
                                 entry={entry} 
                                 fieldEdit={fieldEdit}
                                 onEdit={this.onEdit}
