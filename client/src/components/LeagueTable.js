@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import EntryRow from './EntryRow';
 import Api from '../api/api';
+import Notifications, {notify} from 'react-notify-toast';
+import logo from '../assets/logo.png';
 import './style.scss';
 
 const initialFieldEdit = {
@@ -38,10 +40,12 @@ export default class LeagueTable extends Component {
     }
 
     onDelete = id => {
-        let { entries } = this.state;
-        entries = entries.filter(e => e.id !== id);
-        this.setState({
-            entries
+        Api.deleteEntry(id).then(() => {
+            notify.show('Record has been deleted successfully', 'success', 2500);
+            this.fetchEntries();
+        })
+        .catch(err => {
+            notify.show('An error occured while trying to delete the record', 'error', 2500);
         });
     }
 
@@ -60,10 +64,14 @@ export default class LeagueTable extends Component {
                 ...initialFieldEdit 
             },
         });
-        console.log(entry);
+
         Api.updateEntry(entry).then(response => {
+            notify.show('Record updated successfully', 'success', 2500);
             this.fetchEntries();
-        });
+        })
+        .catch(err => {
+            notify.show('An error occured while trying to update the record', 'error', 2500);
+        })
     }
 
     render() {
@@ -72,7 +80,8 @@ export default class LeagueTable extends Component {
 
         return (
             <div className="league_table_wrapper">
-                <h1>The Poke League</h1>
+                <img className="logo" src={logo} />
+                <Notifications />
                 <div className="league_table_inner">
                     <div className="league_table_inner_header">
                         <div>

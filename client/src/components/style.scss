@@ -2,11 +2,22 @@
 
 html {
     font-size: 16px;
-    background-color: #3D7DCA;
+    background-color: #7cd0fe;
+    background-image: url(../assets/background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 * {
     font-family: 'Comic Neue', cursive;
+}
+
+.logo {
+    width: 350px;
+    margin: 0 auto;
+    display: block;
 }
 
 .league_table_wrapper {
@@ -23,6 +34,7 @@ html {
 
     .league_table_inner {
         width: 100%;
+        margin-bottom: 100px;
 
         .league_table_inner_header {
             background-color: #FFCB05;
@@ -59,6 +71,13 @@ html {
                 background-color: #3D7DCA;
                 color: white;
                 cursor: pointer;
+
+                &:hover {
+                    color: #003A70;
+                    border: solid 1px #003A70;
+                    border-top: none;
+                    transition: all .3s ease-out;
+                }
             }
 
             .league_table_inner_body_row_delete {
