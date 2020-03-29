@@ -75,20 +75,56 @@ export default class LeagueTable extends Component {
         })
         .catch(err => {
             notify.show('An error occured while trying to update the record', 'error', 2500);
+        });
+    }
+
+    resetSeason = () => {
+        Api.resetSeason().then(response => {
+            notify.show('The season has been reset successfully', 'success', 2500);
+            this.setState({
+                entries: response.data
+            })
         })
+        .catch(err => {
+            notify.show('An error occured while trying to reset the season', 'error', 2500);
+        });
     }
 
     render() {
-        let { entries, fieldEdit, deleteId, deleteModal } = this.state;
+        let { 
+            entries, 
+            fieldEdit, 
+            deleteId, 
+            deleteModal,
+            resetSeasonModal 
+        } = this.state;
+
         entries = entries.sort((a, b) => b.score - a.score);
 
         return (
             <div className="league_table_wrapper">
                 <img className="logo" src={logo} />
                 <Notifications />
+
+                {resetSeasonModal &&
+                    <ConfirmationModal
+                        title="Reset Season"
+                        message="Are you sure you wish to reset the season? (This will reset all wins, draws and losses to 0)"
+                        onApprove={() => {
+                            this.setState({
+                                resetSeasonModal: false,
+                            });
+                            this.resetSeason();
+                        }}
+                        onDecline={() => this.setState({
+                            resetSeasonModal: false,
+                        })}
+                    />
+                }
+
                 {deleteModal &&
                     <ConfirmationModal
-                        title="Confirm"
+                        title="Confirm Delete"
                         message="Are you sure you wish to delete this record?"
                         onApprove={() => {
                             this.setState({
@@ -103,7 +139,15 @@ export default class LeagueTable extends Component {
                         })}
                     />
                 }
+
                 <div className="league_table_inner">
+                    <div
+                        onClick={() => this.setState({
+                            resetSeasonModal: true,
+                        })} 
+                        className="reset_season">
+                        Reset Season
+                    </div>
                     <div className="league_table_inner_header">
                         <div>
                             Name

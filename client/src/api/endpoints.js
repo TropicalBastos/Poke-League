@@ -3,6 +3,7 @@ const ENDPOINTS = {
     UPDATE_ENTRY: id => `/api/entries/${id}`,
     DELETE_ENTRY: id => `/api/entries/${id}`,
     CREATE_ENTRY: '/api/entries',
+    RESET_SEASON: '/api/entries/resetseason',
 };
 
 export default ENDPOINTS;

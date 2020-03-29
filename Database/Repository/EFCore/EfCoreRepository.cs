@@ -53,5 +53,14 @@ namespace pokeleague.Database.Repository.EFCore
             return entity;
         }
 
+        public async Task<List<TEntity>> BulkUpdate(List<TEntity> entities)
+        {
+            foreach (var entity in entities) {
+                context.Entry(entity).State = EntityState.Modified;
+            }
+            await context.SaveChangesAsync();
+            return entities;
+        }
+
     }
 }
