@@ -40,6 +40,11 @@ html {
         border-top-right-radius: 20px;
         color: white;
         cursor: pointer;
+
+        &:hover {
+            color: black;
+            background-color: #FFCB05;
+        }
     }
 
     .league_table_inner {
