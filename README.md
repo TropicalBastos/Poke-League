@@ -1,4 +1,6 @@
-![alt text](https://raw.githubusercontent.com/TropicalBastos/Poke-League/master/client/src/assets/logo.png)
+<p align="center">
+    <img src="https://raw.githubusercontent.com/TropicalBastos/Poke-League/master/client/src/assets/logo.png">
+</p>
 
 This is a lightweight dynamic league table web app which was built with the intention to keep a record of wins, draws and losses on the Pokemon TCG Online game amongst friends.
 
