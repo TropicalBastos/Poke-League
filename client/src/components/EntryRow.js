@@ -38,8 +38,7 @@ class EntryRow extends Component {
     }
 
     onUpdateNumState = (key, value) => {
-        let cleaned = value.replace(/^0+/, '');
-        cleaned = parseInt(cleaned);
+        let cleaned = parseInt(value);
         cleaned = isNaN(cleaned) ? '' : cleaned;
         this.onUpdateState(key, cleaned);
     }
