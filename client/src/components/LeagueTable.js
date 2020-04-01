@@ -162,6 +162,9 @@ export default class LeagueTable extends Component {
                             L
                         </div>
                         <div>
+                            Games
+                        </div>
+                        <div>
                             Score
                         </div>
                         <div>

@@ -104,6 +104,7 @@ class EntryRow extends Component {
                         losses
                     }
                 </div>
+                <div>{entry.games}</div>
                 <div>{entry.score}</div>
                 <div 
                     onClick={() => onDelete(id)}

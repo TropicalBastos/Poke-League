@@ -13,5 +13,11 @@ namespace pokeleague.Models
                  return (Wins * 3) + Draws;
              }
          }
+
+         public int Games {
+             get {
+                 return Wins + Losses + Draws;
+             }
+         }
     }
 }
