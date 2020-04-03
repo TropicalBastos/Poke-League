@@ -34,7 +34,7 @@ namespace pokeleague.Controllers.Api
 
         [Route("resetseason")]
         [HttpPost]
-        public async Task<List<Entry>> ResetSeason(DateTime seasonEnd)
+        public async Task<List<Entry>> ResetSeason([FromBody] Season newSeason)
         {
             List<Entry> entries = await entryRepository.GetAll();
             var latest = await seasonRepository.GetLatestSeason();
@@ -45,7 +45,7 @@ namespace pokeleague.Controllers.Api
                 entry.Losses = 0;
             }
             entries = await entryRepository.BulkUpdate(entries);
-            await seasonRepository.CreateNewSeason(seasonEnd);
+            await seasonRepository.CreateNewSeason(newSeason.SeasonEnd);
             return entries;
         }
     }
