@@ -24,6 +24,13 @@ namespace pokeleague.Controllers.Api
             entryRepository = _entryRepository;
         }
 
+        [Route("latest")]
+        [HttpGet]
+        public async Task<Season> GetLatestSeason()
+        {
+            return await seasonRepository.GetLatestSeason();
+        }
+
 
         [Route("resetseason")]
         [HttpPost]
