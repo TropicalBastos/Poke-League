@@ -37,6 +37,7 @@ namespace pokeleague
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddScoped<EntryRepository>();
+            services.AddScoped<SeasonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
