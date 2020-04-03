@@ -6,6 +6,7 @@ import ConfirmationModal from './ConfirmationModal';
 import logo from '../assets/logo.png';
 import './style.scss';
 import NewSeasonModal from './NewSeasonModal';
+import SeasonEndCounter from './SeasonEndCounter';
 
 const initialFieldEdit = {
     field: null,
@@ -23,6 +24,7 @@ export default class LeagueTable extends Component {
             deleteModal: false,
             deleteId: null,
             resetSeasonModal: false,
+            latestSeason: null,
         };
     }
 
@@ -34,6 +36,12 @@ export default class LeagueTable extends Component {
         Api.getEntries().then(response => {
             this.setState({
                 entries: response.data
+            });
+        });
+
+        Api.getLatestSeason().then(response => {
+            this.setState({
+                latestSeason: response.data
             });
         });
     }
@@ -101,13 +109,18 @@ export default class LeagueTable extends Component {
             fieldEdit, 
             deleteId, 
             deleteModal,
-            resetSeasonModal 
+            resetSeasonModal,
+            latestSeason,
         } = this.state;
 
         entries = entries.sort((a, b) => b.score - a.score);
 
         return (
             <div className="league_table_wrapper">
+                <SeasonEndCounter 
+                    seasonEnd={latestSeason ? latestSeason.seasonEnd : null} 
+                />
+                
                 <img className="logo" src={logo} />
                 <Notifications />
 

@@ -185,6 +185,19 @@ html {
     border-color: white !important;
 }
 
+.season_end_countdown {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    color: #ffcb09;
+    background: #013a6f;
+    padding: .5rem;
+    max-width: 500px;
+    font-size: 1rem;
+    border: solid 1px #ffca00;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
