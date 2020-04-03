@@ -11,8 +11,10 @@ However this is completely extendable as it was built with generic-ness in mind 
 - Inline editable AJAX cells so that values can be updated on the fly
 - The table is sorted in real time by the current row's score 
 - The score is automatically calculated by the wins, draws and losses cells
+- The games column is also a calculation of wins, draws and losses
 - Add, delete and update cells without a single page reload
-- Ability to reset the season so that all values are set back to 0
+- Ability to create a new season with an end date wherein all entries' values reset to 0 for the new season
+- A countdown until the season ends banner is integrated above the table
 
 ## In the future
 
