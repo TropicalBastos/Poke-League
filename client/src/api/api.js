@@ -17,4 +17,6 @@ Api.deleteEntry = id =>
 Api.resetSeason = data => 
     axios.post(ENDPOINTS.RESET_SEASON, data);
 
+Api.getLatestSeason = () => axios.get(ENDPOINTS.LATEST_SEASON);
+
 export default Api;

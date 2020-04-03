@@ -5,6 +5,7 @@ import Notifications, {notify} from 'react-notify-toast';
 import ConfirmationModal from './ConfirmationModal';
 import logo from '../assets/logo.png';
 import './style.scss';
+import NewSeasonModal from './NewSeasonModal';
 
 const initialFieldEdit = {
     field: null,
@@ -78,15 +79,19 @@ export default class LeagueTable extends Component {
         });
     }
 
-    resetSeason = () => {
-        Api.resetSeason().then(response => {
-            notify.show('The season has been reset successfully', 'success', 2500);
-            this.setState({
-                entries: response.data
+    resetSeason = seasonEnd => {
+        this.setState({
+            resetSeasonModal: false,
+        }, () => {
+            Api.resetSeason({ seasonEnd }).then(response => {
+                notify.show('The season has been reset successfully', 'success', 2500);
+                this.setState({
+                    entries: response.data
+                })
             })
-        })
-        .catch(err => {
-            notify.show('An error occured while trying to reset the season', 'error', 2500);
+            .catch(err => {
+                notify.show('An error occured while trying to reset the season', 'error', 2500);
+            });
         });
     }
 
@@ -107,15 +112,8 @@ export default class LeagueTable extends Component {
                 <Notifications />
 
                 {resetSeasonModal &&
-                    <ConfirmationModal
-                        title="Reset Season"
-                        message="Are you sure you wish to reset the season? (This will reset all wins, draws and losses to 0)"
-                        onApprove={() => {
-                            this.setState({
-                                resetSeasonModal: false,
-                            });
-                            this.resetSeason();
-                        }}
+                    <NewSeasonModal
+                        resetSeason={this.resetSeason}
                         onDecline={() => this.setState({
                             resetSeasonModal: false,
                         })}
