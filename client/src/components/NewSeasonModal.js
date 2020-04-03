@@ -44,10 +44,10 @@ class NewSeasonModal extends Component {
             <div className="modal_wrapper">
                 <div className="new_season modal_inner">
                     <div className="modal_header">
-                        Reset Season
+                        New Season
                     </div>
                     <div className="modal_body">
-                        <p>Are you sure you wish to reset the season? This will reset all wins, draws and losses to 0</p>
+                        <p>Are you sure you wish to create a new season? This will reset all wins, draws and losses to 0</p>
                         <div className="season_end_date_wrapper">
                             <label htmlFor="season_end">End season date:</label>
                             <input 

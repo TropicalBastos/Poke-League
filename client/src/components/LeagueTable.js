@@ -144,7 +144,7 @@ export default class LeagueTable extends Component {
                             resetSeasonModal: true,
                         })} 
                         className="reset_season">
-                        Reset Season
+                        New Season
                     </div>
                     <div className="league_table_inner_header">
                         <div>
