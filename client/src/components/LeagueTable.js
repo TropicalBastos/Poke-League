@@ -9,6 +9,8 @@ import NewSeasonModal from './NewSeasonModal';
 import SeasonEndCounter from './SeasonEndCounter';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import WinnerBanner from './WinnerBanner';
+import moment from 'moment';
 
 const initialFieldEdit = {
     field: null,
@@ -105,6 +107,12 @@ export default class LeagueTable extends Component {
         });
     }
 
+    hasSeasonEnded = () => {
+        let { latestSeason } = this.state;
+        let now = moment();
+        return latestSeason && now.isAfter(moment(latestSeason.seasonEnd));
+    }
+
     render() {
         let { 
             entries, 
@@ -130,11 +138,15 @@ export default class LeagueTable extends Component {
             );
         }
 
+        let seasonEnded = this.hasSeasonEnded();
+
         return (
             <div className="league_table_wrapper">
-                <SeasonEndCounter 
-                    seasonEnd={latestSeason ? latestSeason.seasonEnd : null} 
-                />
+                {!seasonEnded &&
+                    <SeasonEndCounter 
+                        seasonEnd={latestSeason ? latestSeason.seasonEnd : null} 
+                    />
+                }
                 
                 <img className="logo" src={logo} />
                 <Notifications />
@@ -174,52 +186,59 @@ export default class LeagueTable extends Component {
                         className="reset_season">
                         New Season
                     </div>
-                    <div className="league_table_inner_header">
-                        <div>
-                            Name
-                        </div>
-                        <div>
-                            W
-                        </div>
-                        <div>
-                            D
-                        </div>
-                        <div>
-                            L
-                        </div>
-                        <div>
-                            Games
-                        </div>
-                        <div>
-                            Score
-                        </div>
-                        <div>
-                            Action
-                        </div>
-                    </div>
 
-                    <div className="league_table_inner_body">
-                        {entries.map((entry, index) => (
-                            <EntryRow 
-                                key={index}
-                                onDelete={(id) => this.setState({ 
-                                    deleteId: id,
-                                    deleteModal: true,
-                                })} 
-                                entry={entry} 
-                                fieldEdit={fieldEdit}
-                                onEdit={this.onEdit}
-                                onBlur={this.onCellBlur}
-                            />
-                        ))}
-                        <div className="league_table_inner_body_row">
-                            <div 
-                                onClick={this.addEntry}
-                                className="add_row">
-                                Add Entry +
+                    {seasonEnded && <WinnerBanner winner={latestSeason.winner} />}
+
+                    {!seasonEnded &&
+                        <div className="league_table_inner_header">
+                            <div>
+                                Name
+                            </div>
+                            <div>
+                                W
+                            </div>
+                            <div>
+                                D
+                            </div>
+                            <div>
+                                L
+                            </div>
+                            <div>
+                                Games
+                            </div>
+                            <div>
+                                Score
+                            </div>
+                            <div>
+                                Action
                             </div>
                         </div>
-                    </div>
+                    }
+
+                    {!seasonEnded &&
+                        <div className="league_table_inner_body">
+                            {entries.map((entry, index) => (
+                                <EntryRow 
+                                    key={index}
+                                    onDelete={(id) => this.setState({ 
+                                        deleteId: id,
+                                        deleteModal: true,
+                                    })} 
+                                    entry={entry} 
+                                    fieldEdit={fieldEdit}
+                                    onEdit={this.onEdit}
+                                    onBlur={this.onCellBlur}
+                                />
+                            ))}
+                            <div className="league_table_inner_body_row">
+                                <div 
+                                    onClick={this.addEntry}
+                                    className="add_row">
+                                    Add Entry +
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         );
