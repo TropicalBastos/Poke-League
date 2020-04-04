@@ -15,9 +15,10 @@ However this is completely extendable as it was built with generic-ness in mind 
 - Add, delete and update cells without a single page reload
 - Ability to create a new season with an end date wherein all entries' values reset to 0 for the new season
 - A countdown until the season ends banner is integrated above the table
+- The winner is announced via a banner UI control when the season ends
 
 ## In the future
 
 When time is on my side I plan to dockerize this dotnet/react application so as to make it more portable and less reliant on server setup.
 
-![alt text](https://raw.githubusercontent.com/TropicalBastos/Poke-League/master/screenshots/1.png)
+![alt text](https://raw.githubusercontent.com/TropicalBastos/Poke-League/master/screenshots/2.png)
