@@ -94,16 +94,18 @@ export default class LeagueTable extends Component {
     resetSeason = seasonEnd => {
         this.setState({
             resetSeasonModal: false,
-        }, () => {
-            Api.resetSeason({ seasonEnd }).then(response => {
+        }, async () => {
+            try {
+                let response = await Api.resetSeason({ seasonEnd });
+                let seasonResponse = await Api.getLatestSeason();
                 notify.show('The season has been reset successfully', 'success', 2500);
                 this.setState({
-                    entries: response.data
-                })
-            })
-            .catch(err => {
+                    entries: response.data,
+                    latestSeason: seasonResponse.data,
+                });
+            } catch(err) {
                 notify.show('An error occured while trying to reset the season', 'error', 2500);
-            });
+            }
         });
     }
 
