@@ -7,6 +7,8 @@ import logo from '../assets/logo.png';
 import './style.scss';
 import NewSeasonModal from './NewSeasonModal';
 import SeasonEndCounter from './SeasonEndCounter';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const initialFieldEdit = {
     field: null,
@@ -114,6 +116,19 @@ export default class LeagueTable extends Component {
         } = this.state;
 
         entries = entries.sort((a, b) => b.score - a.score);
+
+        if (!latestSeason) {
+            return(
+                <div className="loader">
+                    <Loader
+                    type="Puff"
+                    color="#ffcb09"
+                    height={100}
+                    width={100}
+                    />
+                </div>
+            );
+        }
 
         return (
             <div className="league_table_wrapper">

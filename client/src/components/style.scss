@@ -198,6 +198,16 @@ html {
     border: solid 1px #ffca00;
 }
 
+.loader {
+    width: 100px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    display: block;
+    top: calc(50vh - 100px);
+    position: absolute;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
