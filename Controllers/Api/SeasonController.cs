@@ -28,7 +28,16 @@ namespace pokeleague.Controllers.Api
         [HttpGet]
         public async Task<Season> GetLatestSeason()
         {
-            return await seasonRepository.GetLatestSeason();
+            var latest = await seasonRepository.GetLatestSeason();
+
+            List<Entry> entries = await entryRepository.GetAll();
+
+            if (DateTime.Now >= latest.SeasonEnd && latest.Winner == null) {
+                latest.Winner = entries.OrderByDescending(i => i.Score).First().Name;
+                await seasonRepository.Update(latest);
+            }
+
+            return latest;
         }
 
 
