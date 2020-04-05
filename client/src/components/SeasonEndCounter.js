@@ -12,9 +12,20 @@ class SeasonEndCounter extends Component {
 
     componentDidMount() {
         this.interval = setInterval(() => {
-            this.setState({
-                countdown: this.getCountdownTime(this.props.seasonEnd)
-            });
+            let countdown = this.getCountdownTime(this.props.seasonEnd);
+            let countdownBelowZero = (
+                countdown.days() < 0 || 
+                countdown.hours() < 0 || 
+                countdown.minutes() < 0 || 
+                countdown.seconds() < 0
+            ) ;
+            if (countdownBelowZero && !this.props.refetchingLatestSeason) {
+                this.props.refetchSeason();
+            } else if (!countdownBelowZero) {
+                this.setState({
+                    countdown
+                });
+            }
         }, 1000);
     }
 

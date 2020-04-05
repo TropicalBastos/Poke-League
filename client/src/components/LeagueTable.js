@@ -29,6 +29,7 @@ export default class LeagueTable extends Component {
             deleteId: null,
             resetSeasonModal: false,
             latestSeason: null,
+            refetchingLatestSeason: false,
         };
     }
 
@@ -91,6 +92,22 @@ export default class LeagueTable extends Component {
         });
     }
 
+    refetchSeason = () => {
+        this.setState({
+            refetchingLatestSeason: true,
+        }, async () => {
+            try {
+                let seasonResponse = await Api.getLatestSeason();
+                this.setState({
+                    latestSeason: seasonResponse.data,
+                    refetchingLatestSeason: false,
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        });
+    }
+
     resetSeason = seasonEnd => {
         this.setState({
             resetSeasonModal: false,
@@ -123,6 +140,7 @@ export default class LeagueTable extends Component {
             deleteModal,
             resetSeasonModal,
             latestSeason,
+            refetchingLatestSeason,
         } = this.state;
 
         entries = entries.sort((a, b) => b.score - a.score);
@@ -147,6 +165,8 @@ export default class LeagueTable extends Component {
                 {!seasonEnded &&
                     <SeasonEndCounter 
                         seasonEnd={latestSeason ? latestSeason.seasonEnd : null} 
+                        refetchSeason={this.refetchSeason}
+                        refetchingLatestSeason={refetchingLatestSeason}
                     />
                 }
                 
